@@ -51,7 +51,7 @@ export default class PoolPage extends React.Component {
       }
     });
 
-    this.initWallet();
+    // this.initWallet();
     this.initPoolData();
 
     this.timer = window.setInterval(() => {
@@ -80,7 +80,7 @@ export default class PoolPage extends React.Component {
   checkApprove = async () => {
     const poolAddress = this.props.match.params.id;
     const { web3, daiObj, walletAddress, network } = this.props.common;
-    
+
     if (daiObj && web3) {
       const result = await daiObj.methods.allowance(walletAddress, poolAddress).call();
       const isApproved = window.localStorage.getItem(`${poolAddress}_${network}`);
@@ -206,7 +206,7 @@ export default class PoolPage extends React.Component {
     const { web3, currentPoolObj, walletAddress, RBTBalance } = this.props.common;
 
     if (RBTBalance <= 0) {
-      message.error('You have no asset to recaption!');
+      message.error('You have no asset to redeem!');
       return;
     }
 
@@ -224,7 +224,7 @@ export default class PoolPage extends React.Component {
       if (sellResult) {
         notification.success({
           message: 'Success!',
-          description: 'You have successfully recaption your assets!',
+          description: 'You have successfully redeem your assets!',
         });
       }
     }
@@ -309,7 +309,7 @@ export default class PoolPage extends React.Component {
 
             <div>
               <Button type="primary" onClick={() => { dispatch({ type: 'rebalancer/updateBuyModalVisible', payload: true }) }}>Deposit</Button>
-              <Button type="primary" onClick={() => { dispatch({ type: 'rebalancer/updateSellModalVisible', payload: true }) }}>Recaption</Button>
+              <Button type="primary" onClick={() => { dispatch({ type: 'rebalancer/updateSellModalVisible', payload: true }) }}>Redeem</Button>
             </div>
           </div>
 
@@ -326,28 +326,6 @@ export default class PoolPage extends React.Component {
           <div className={styles.box__chart}>
             <LineChart data={chartData} />
           </div>
-
-          <Row className={styles.box__rebalance}>
-            <Col span={12}>
-              <section>
-                  <img src={require('@assets/sets/link.png')} />
-                  <h2>This Set is currently not rebalancing</h2>
-
-                  <span>Follow this set to get email notifications when it rebalances.</span>
-              </section>
-            </Col>
-
-            <Col span={12}>
-              <div className={styles.box__rebalance_info}>
-                <h3>How BonegaTBTC Works</h3>
-                <p>
-                  Welcome to the BonegaTBTC. BonegaTBTC is the process of realigning the weights of tokens inside of a Set to the Set’s target weights.
-
-                  Taking part in a rebalance involves supplying undercollateralized component tokens to the Set and receiving over collateralized tokens in return. When you bid during the auction, you supply and receive tokens in the same transaction. Your funds are never locked in the auction.
-                </p>
-              </div>
-            </Col>
-          </Row>
         </section>
 
         <Modal

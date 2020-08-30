@@ -42,9 +42,8 @@ export default class PageHeader extends React.Component {
           BonegaTBTC
         </a>
 
-        <img onClick={this.openMenu} className={styles.header__dropdown} src={require('@assets/icon_menu.svg')} alt="menu" />
-
         <div className={styles.header__menu}>
+          <a href="https://github.com/merlin-li/BonegaTBTC" target="_blank">GitHub</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           {
             walletAddress ?
               (
