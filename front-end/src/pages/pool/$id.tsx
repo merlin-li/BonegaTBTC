@@ -51,7 +51,7 @@ export default class PoolPage extends React.Component {
       }
     });
 
-    // this.initWallet();
+    this.initWallet();
     this.initPoolData();
 
     this.timer = window.setInterval(() => {
@@ -78,20 +78,7 @@ export default class PoolPage extends React.Component {
 
   // check approve
   checkApprove = async () => {
-    const poolAddress = this.props.match.params.id;
-    const { web3, daiObj, walletAddress, network } = this.props.common;
 
-    if (daiObj && web3) {
-      const result = await daiObj.methods.allowance(walletAddress, poolAddress).call();
-      const isApproved = window.localStorage.getItem(`${poolAddress}_${network}`);
-
-      // approve
-      if (+result === 0 && isApproved !== 'approved') {
-        window.localStorage.setItem(`${poolAddress}_${network}`, 'approved');
-        await daiObj.methods.approve(poolAddress, web3.utils.toWei('10000000', 'ether'))
-          .send({ from: walletAddress });
-      }
-    }
   }
 
   // get pool token balance
@@ -159,10 +146,21 @@ export default class PoolPage extends React.Component {
   // buy
   handleBuyEvent = async () => {
     const { dispatch } = this.props;
-    const { web3, currentPoolObj, walletAddress } = this.props.common;
+    const { web3, daiObj, network, currentPoolObj, walletAddress } = this.props.common;
     const { buyETHValue } = this.state;
+    const poolAddress = this.props.match.params.id;
 
-    await this.checkApprove();
+    if (daiObj && web3) {
+      const result = await daiObj.methods.allowance(walletAddress, poolAddress).call();
+      const isApproved = window.localStorage.getItem(`${poolAddress}_${network}`);
+
+      // approve
+      if (+result === 0 && isApproved !== 'approved') {
+        window.localStorage.setItem(`${poolAddress}_${network}`, 'approved');
+        await daiObj.methods.approve(poolAddress, web3.utils.toWei('10000000', 'ether'))
+          .send({ from: walletAddress });
+      }
+    }
 
     if (buyETHValue <= 0) {
       message.error('You should depost 1 DAI at least!');
@@ -175,7 +173,7 @@ export default class PoolPage extends React.Component {
     });
 
     if (currentPoolObj) {
-      const buyResult = await currentPoolObj.methods.deposit(web3.utils.toWei(buyETHValue)).send({
+      const buyResult = await currentPoolObj.methods.deposit(web3.utils.toWei(buyETHValue.toString(), 'ether')).send({
         from: walletAddress,
         gas: 1000000
       });
