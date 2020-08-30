@@ -1,0 +1,105 @@
+body, div, section, article, p, h1 {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #FBFBFD;
+}
+
+.frame {
+  position: absolute;
+  left: calc(50% - 187px);
+  top: calc(50% - 333px);
+  width: 375px;
+  height: 667px;
+  z-index: -1;
+}
+
+.loader {
+  position: absolute;
+  width: 105px;
+  left: calc(50% - 52px);
+  top: calc(50% - 52px);
+  animation: fadeIn 2s;
+  text-align: center;
+}
+
+body .ant-modal-content {
+  border-radius: 20px;
+}
+body .ant-modal-header {
+  /* border-radius: 20px; */
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button{
+    -webkit-appearance: none !important;
+    margin: 0;
+  }
+  input[type="number"]{-moz-appearance:textfield;}
+
+@-webkit-keyframes line-scale {
+  0% {
+    -webkit-transform: scaley(1);
+            transform: scaley(1);
+}
+  50% {
+    -webkit-transform: scaley(0.4);
+            transform: scaley(0.4);
+}
+  100% {
+    -webkit-transform: scaley(1);
+            transform: scaley(1); }
+}
+@keyframes line-scale {
+  0% {
+    -webkit-transform: scaley(1);
+            transform: scaley(1);
+}
+  50% {
+    -webkit-transform: scaley(0.4);
+            transform: scaley(0.4);
+}
+  100% {
+    -webkit-transform: scaley(1);
+            transform: scaley(1); }
+}
+
+.line-scale > div:nth-child(1) {
+  -webkit-animation: line-scale 1s -0.4s infinite cubic-bezier(0.2, 0.68, 0.18, 1.08);
+          animation: line-scale 1s -0.4s infinite cubic-bezier(0.2, 0.68, 0.18, 1.08);
+}
+
+.line-scale > div:nth-child(2) {
+  -webkit-animation: line-scale 1s -0.3s infinite cubic-bezier(0.2, 0.68, 0.18, 1.08);
+          animation: line-scale 1s -0.3s infinite cubic-bezier(0.2, 0.68, 0.18, 1.08);
+}
+
+.line-scale > div:nth-child(3) {
+  -webkit-animation: line-scale 1s -0.2s infinite cubic-bezier(0.2, 0.68, 0.18, 1.08);
+          animation: line-scale 1s -0.2s infinite cubic-bezier(0.2, 0.68, 0.18, 1.08);
+}
+
+.line-scale > div:nth-child(4) {
+  -webkit-animation: line-scale 1s -0.1s infinite cubic-bezier(0.2, 0.68, 0.18, 1.08);
+          animation: line-scale 1s -0.1s infinite cubic-bezier(0.2, 0.68, 0.18, 1.08);
+}
+
+.line-scale > div:nth-child(5) {
+  -webkit-animation: line-scale 1s 0s infinite cubic-bezier(0.2, 0.68, 0.18, 1.08);
+          animation: line-scale 1s 0s infinite cubic-bezier(0.2, 0.68, 0.18, 1.08);
+}
+
+.line-scale > div {
+  background-color: #5741D9;
+  width: 4px;
+  height: 35px;
+  border-radius: 2px;
+  margin: 2px;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  display: inline-block;
+}

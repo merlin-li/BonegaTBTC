@@ -1,0 +1,19 @@
+{
+  "name": "etherlime-project",
+  "version": "1.0.0",
+  "description": "This is the default package.json generated for your project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@openzeppelin/contracts": "^3.1.0",
+    "@uniswap/lib": "^1.1.2",
+    "@uniswap/sdk": "^3.0.2",
+    "@uniswap/v2-periphery": "^1.1.0-beta.0",
+    "bignumber.js": "^9.0.0",
+    "etherlime-lib": "^1.2.3"
+  }
+}

@@ -1,0 +1,172 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 40px;
+  z-index: 100;
+  position: relative;
+  background: #fff;
+  height: 70px;
+  display: flex;
+  align-items: center;
+
+  &__logo {
+    width: 134px;
+    height: 40px;
+    display: inline-flex;
+    font-size: 30px;
+    font-weight: 700;
+    color: #5956E9;
+  }
+
+  &__dropdown {
+    display: none;
+  }
+
+  &__overlay {
+    width: 168px;
+    border: 1px solid rgba(229, 230, 242, 1);
+    box-shadow: 0px 8px 25px 0px rgba(7,2,55,0.1);
+    border-radius: 6px;
+
+    &_item {
+      margin-bottom: 20px;
+
+      span {
+        color: #252152;
+        display: block;
+        font-size: 16px;
+        font-weight: 500;
+        font-family: Roboto;
+
+        &:hover {
+          color: #D5A14D;
+        }
+      }
+
+      label {
+        color: #8B8EA5;
+        width: 128px;
+        word-wrap: break-word;
+        display: block;
+        margin-top: 5px;
+        font-size: 14px;
+      }
+    }
+  }
+
+  &__menu {
+    display: inline-flex;
+    align-items: center;
+
+    label {
+      cursor: pointer;
+    }
+
+    &_item {
+      font-size: 16px;
+      color: #252152;
+      font-weight: 500;
+      margin-right: 20px;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    img {
+      width: 11px;
+      margin-left: 5px;
+      margin-top: 2px;
+      cursor: pointer;
+    }
+
+    &_wallet {
+      color: #fff;
+      width: 158px;
+      height: 36px;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 30px;
+      background: #5956E9;
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      div {
+        width: 86%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-around;
+        color: #fff;
+
+        img {
+          width: 15px;
+          margin: 0;
+        }
+
+        a {
+          color: #fff;
+        }
+      }
+      i {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+      }
+
+      &:hover {
+        color: #5741d9;
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    width: 93%;
+    padding: 0;
+    margin: 20px auto 0;
+
+    &__logo {
+      width: 80px;
+      height: 24px;
+      display: inline-flex;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    &__close {
+      width: 17px;
+      cursor: pointer;
+    }
+
+    &__menu {
+      display: none;
+    }
+
+    &__dropdown {
+      width: 21px;
+      display: inline-flex;
+    }
+
+    &__overlay_item {
+      display: block;
+      margin: 16px 0 0 0;
+
+      span {
+        font-size: 15px;
+        font-weight: 500;
+      }
+      label {
+        width: 100%;
+        font-size: 13px;
+        margin: 0;
+      }
+    }
+  }
+}
