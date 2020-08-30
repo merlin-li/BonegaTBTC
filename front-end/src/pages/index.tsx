@@ -53,7 +53,7 @@ export default class IndexPage extends React.Component {
 
           <h3>1. What is BonegaTBTC？</h3>
           <p>
-            BobegaTBTC, a DeFi protocol that integrates TBTC, allows user to create a portfolio include BTC on ethereum while rebalancing their portfolio. All processes are protected by cryptography, which making them more secure and transparent. Bonega means "great" in Esperanto, thanks to Keep Network for bringing us such a robust TBTC.
+            BobegaTBTC, a DeFi protocol that integrates TBTC, allows user to create a portfolio including BTC on ethereum and rebalance their portfolio. All processes are protected by cryptography, which making them more secure and transparent. Bonega means "great" in Esperanto, thanks to Keep Network for bringing us such a robust TBTC.
           </p>
 
           <h3>2. What is TBTC？Why do we choose TBTC？</h3>
@@ -63,7 +63,7 @@ export default class IndexPage extends React.Component {
 
           <h3>3. Which assets are supported currently?</h3>
           <p>
-            BonegaTBTC currently supports TBTC, WETH and DAI. These are some of the most robust assets in cryptocurrency right now. In order for users to have a more diverse portfolio, we also support PAX Gold(PAXG), Every PAX Gold token is backed by an ounce of allocated gold. We are planning to support more tokens in the future.
+            BonegaTBTC currently supports TBTC, WETH and DAI. These are some of the most robust assets in cryptocurrency right now. In order for users to have a more diverse portfolio, we also support PAX Gold(PAXG). Every PAX Gold token is backed by an ounce of allocated gold. We are planning to support more tokens in the future.
           </p>
 
           <h3>4. What is Rebalance？</h3>
