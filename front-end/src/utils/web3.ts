@@ -13,33 +13,8 @@ export async function setupContracts(dispatch) {
 
   dispatch('rebalancerObj', new web3.eth.Contract(RebalancerABI, config[networkName].Rebalancer));
 
-  // console.log(testdaiABI)
   const daiObj = new web3.eth.Contract(testDAIABI, config[networkName].DAI);
   dispatch('daiObj', daiObj);
-  //
-  // console.log(testdai.methods)
-  //
-  // daiObj.methods.mint('10000000000000000000000').send({
-  //   from: walletAddress
-  // });
-
-  // console.log(web3.utils.toWei('10000'))
-  // return testDAI.methods.approve('0x065F9B7fA92393F55d3F72d1532bdaDBAf78F5FA', web3.utils.toWei('10000000', 'ether'))
-  //   .send({ from: walletAddress })
-  //   .then(() => {
-  //     window.localStorage.setItem('approved', 'true');
-  //   });
-}
-
-// approval
-export async function approval() {
-  const { usdxObj, usrObj, walletAddress } = this.props.common;
-  return usdxObj.methods.approve(usrObj.options.address, '-1')
-    .send({ from: walletAddress })
-    .then(() => {
-      window.localStorage.setItem('approved', 'true');
-    }
-  );
 }
 
 // get allowance data
@@ -79,13 +54,13 @@ export async function initBrowserWallet(setContracts = true) {
       await window.ethereum.enable();
     } catch (error) {
       // User denied account access...
-      console.error("User denied account access");
+      message.error("User denied account access");
+      return;
     }
 
     if (window.ethereum.on) {
       window.ethereum.on('accountsChanged', (accounts) => {
         try {
-          // initBrowserWallet.bind(this)(!!this.props.match.params.id);
           window.location.reload();
         } catch (err) {
           console.log(err);
@@ -119,8 +94,6 @@ export async function initBrowserWallet(setContracts = true) {
   dispatch('walletType', walletType);
   dispatch('modalVisible', false);
   dispatch('currentBalance', (balance / 1e18).toFixed(4));
-
-  // setupDFConstract.bind(this)(dispatch);
 
   if (setContracts) {
     await setupContracts.bind(this)(dispatch);

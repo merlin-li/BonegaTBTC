@@ -80,6 +80,7 @@ export default class PoolPage extends React.Component {
   checkApprove = async () => {
     const poolAddress = this.props.match.params.id;
     const { web3, daiObj, walletAddress, network } = this.props.common;
+    
     if (daiObj && web3) {
       const result = await daiObj.methods.allowance(walletAddress, poolAddress).call();
       const isApproved = window.localStorage.getItem(`${poolAddress}_${network}`);
@@ -132,7 +133,6 @@ export default class PoolPage extends React.Component {
         }
       });
 
-      this.checkApprove();
       this.getPoolTokenBalance();
     } else {
       if (web3 && network) {
@@ -151,7 +151,6 @@ export default class PoolPage extends React.Component {
           }
         });
 
-        this.checkApprove();
         this.getPoolTokenBalance();
       }
     }
@@ -162,6 +161,8 @@ export default class PoolPage extends React.Component {
     const { dispatch } = this.props;
     const { web3, currentPoolObj, walletAddress } = this.props.common;
     const { buyETHValue } = this.state;
+
+    await this.checkApprove();
 
     if (buyETHValue <= 0) {
       message.error('You should depost 1 DAI at least!');

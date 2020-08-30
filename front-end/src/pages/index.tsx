@@ -4,7 +4,7 @@ import styles from './index.less';
 import PageHeader from '@components/PageHeader';
 import PoolList from '@components/PoolList';
 import { initBrowserWallet, fetchDataOfTheContract } from '@utils/web3';
-import { Modal, Button, Input, notification, Alert } from 'antd';
+import { Button, Input, notification, Alert } from 'antd';
 import PoolABI from '../abi/Pool.abi.json';
 
 @connect(({ rebalancer, common, loading }) => ({
@@ -13,92 +13,15 @@ import PoolABI from '../abi/Pool.abi.json';
   loading: loading.models.rebalancer
 }))
 export default class IndexPage extends React.Component {
-  state = {
-    oneValue: 28,
-    twoValue: 72,
-    poolDesc: 'WETH/PAXG',
-  }
-
-  initWaleltData = () => {
-    initBrowserWallet.bind(this)(true);
-  }
-
   componentDidMount() {
-    this.initWaleltData();
     document.getElementById('page__loader').style.display = 'none';
-  }
-
-  handleCreateCancelEvent = () => {
-    this.props.dispatch({
-      type: 'rebalancer/updateCreateModalVisible',
-      payload: false,
-    });
-  }
-
-  // create pool
-  handleCreateEvent = async () => {
-    const { oneValue, twoValue, poolDesc } = this.state;
-    const { rebalancerObj, walletAddress } = this.props.common;
-
-    this.props.dispatch({
-      type: 'rebalancer/updateCreateBtnLoading',
-      payload: true,
-    });
-
-    let result = await rebalancerObj.methods.createPool(+oneValue, +twoValue, poolDesc).send({
-      from: walletAddress,
-    });
-
-    if (result) {
-      notification.success({
-        message: 'Success!',
-        description: 'You have created a sets pool successfully!',
-      });
-      this.handleCreateCancelEvent();
-    }
-
-    this.props.dispatch({
-      type: 'rebalancer/updateCreateBtnLoading',
-      payload: false,
-    });
-  }
-
-  handleChangeOne = e => {
-    let oneValue = parseInt(e.target.value);
-    if (oneValue > 100) {
-      oneValue = 100;
-    }
-    let twoValue = 100 - oneValue;
-
-    this.setState({
-      oneValue,
-      twoValue,
-    });
-  }
-
-  handleChangeTwo = e => {
-    let twoValue = parseInt(e.target.value);
-    if (twoValue > 100) {
-      twoValue = 100;
-    }
-    let oneValue = 100 - twoValue;
-
-    this.setState({
-      oneValue,
-      twoValue,
-    });
-  }
-
-  handleChangeDesc = e => {
-    this.setState({
-      poolDesc: e.target.value,
-    });
   }
 
   render() {
     return (
       <div className={styles.container}>
         <Alert message="We now only support Ropsten network!" type="warning" showIcon closable />
+
         <PageHeader { ...this.props } />
 
         <section className={styles.container__banner}>
@@ -153,34 +76,6 @@ export default class IndexPage extends React.Component {
             When you purchase or create a Set, you will receive RBT as a credential. You can redeem the asset with the RBT（Rebalance Pool Token）.We'll unlock more features for the RBT in the future
           </p>
         </section>
-
-        <Modal
-          title="Create sets"
-          centered
-          onCancel={this.handleCreateCancelEvent}
-          visible={this.props.rebalancer.createModalVisible}
-          footer={(
-            <div className={styles.modal__footer}>
-              <Button onClick={this.handleCreateCancelEvent}>Cancel</Button>
-              <Button type="primary" loading={this.props.rebalancer.createBtnLoading} onClick={this.handleCreateEvent}>Create</Button>
-            </div>
-          )}
-        >
-          <div className={styles.modal__content}>
-            <section className={styles.modal__content_header}>
-              <img src={require('@assets/sets/eth.png')} />
-            </section>
-            <section>
-              WETH: <input type="number" value={this.state.oneValue} className={styles.modal__content_percent} onChange={this.handleChangeOne} />%
-            </section>
-            <section>
-              PAXG: <input type="number" value={this.state.twoValue} className={styles.modal__content_percent} onChange={this.handleChangeTwo} />%
-            </section>
-            <section className={styles.modal__content_description}>
-              Desc: <input type="text" value={this.state.poolDesc} className={styles.modal__content_desc} onChange={this.handleChangeDesc} />
-            </section>
-          </div>
-        </Modal>
       </div>
     );
   }

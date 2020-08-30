@@ -57,6 +57,7 @@ export default class PoolList extends React.Component {
               <Tooltip
                 title={ item.disabled ? 'Not Available on Testnet' : 'Have a try!' }
                 visible={false}
+                key={item.address}
               >
                 <div className={styles.box__item} key={item.address} onClick={() => { router.push(`/pool/${item.address}`) }}>
                   <div className={styles.box__item_header}>
